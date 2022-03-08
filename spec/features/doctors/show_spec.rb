@@ -38,4 +38,23 @@ RSpec.describe 'Doctors SHOW page' do
     expect(page).to_not have_content("Medical School: #{doctor_2.university}")
   end
 
+  it "Shows name of hospital where doctor works" do
+    visit "/doctors/#{doctor_1.id}"
+
+    expect(page).to have_content(hospital_1.name)
+    expect(page).to_not have_content(hospital_2.name)
+  end
+
+  it "Shows all of the patients associated with a specific doctor" do
+    visit "/doctors/#{doctor_1.id}"
+
+    expect(page).to have_content(patient_1.name)
+    expect(page).to have_content(patient_2.name)
+
+    expect(page).to_not have_content(patient_3.name)
+    expect(page).to_not have_content(patient_4.name)
+  end
+
+
+
 end
