@@ -17,44 +17,43 @@ RSpec.describe 'Doctors SHOW page' do
   let!(:doctor_patient_3) {DoctorPatient.create!(patient_id: patient_3.id, doctor_id: doctor_2.id)}
   let!(:doctor_patient_4) {DoctorPatient.create!(patient_id: patient_4.id, doctor_id: doctor_2.id)}
 
-  it "Shows the doctor's name" do
-    visit "/doctors/#{doctor_1.id}"
+  describe 'User Story #1' do
+    it "Shows the doctor's name" do
+      visit "/doctors/#{doctor_1.id}"
 
-    expect(page).to have_content(doctor_1.name)
-    expect(page).to_not have_content(doctor_2.name)
+      expect(page).to have_content(doctor_1.name)
+      expect(page).to_not have_content(doctor_2.name)
+    end
+
+    it "Shows the doctor's specialty" do
+      visit "/doctors/#{doctor_1.id}"
+
+      expect(page).to have_content("Specialty: #{doctor_1.specialty}")
+      expect(page).to_not have_content("Specialty: #{doctor_2.specialty}")
+    end
+
+    it "Shows the doctor's university" do
+      visit "/doctors/#{doctor_1.id}"
+
+      expect(page).to have_content("Medical School: #{doctor_1.university}")
+      expect(page).to_not have_content("Medical School: #{doctor_2.university}")
+    end
+
+    it "Shows name of hospital where doctor works" do
+      visit "/doctors/#{doctor_1.id}"
+
+      expect(page).to have_content(hospital_1.name)
+      expect(page).to_not have_content(hospital_2.name)
+    end
+
+    it "Shows all of the patients associated with a specific doctor" do
+      visit "/doctors/#{doctor_1.id}"
+
+      expect(page).to have_content(patient_1.name)
+      expect(page).to have_content(patient_2.name)
+
+      expect(page).to_not have_content(patient_3.name)
+      expect(page).to_not have_content(patient_4.name)
+    end
   end
-
-  it "Shows the doctor's specialty" do
-    visit "/doctors/#{doctor_1.id}"
-
-    expect(page).to have_content("Specialty: #{doctor_1.specialty}")
-    expect(page).to_not have_content("Specialty: #{doctor_2.specialty}")
-  end
-
-  it "Shows the doctor's university" do
-    visit "/doctors/#{doctor_1.id}"
-
-    expect(page).to have_content("Medical School: #{doctor_1.university}")
-    expect(page).to_not have_content("Medical School: #{doctor_2.university}")
-  end
-
-  it "Shows name of hospital where doctor works" do
-    visit "/doctors/#{doctor_1.id}"
-
-    expect(page).to have_content(hospital_1.name)
-    expect(page).to_not have_content(hospital_2.name)
-  end
-
-  it "Shows all of the patients associated with a specific doctor" do
-    visit "/doctors/#{doctor_1.id}"
-
-    expect(page).to have_content(patient_1.name)
-    expect(page).to have_content(patient_2.name)
-
-    expect(page).to_not have_content(patient_3.name)
-    expect(page).to_not have_content(patient_4.name)
-  end
-
-
-
 end
