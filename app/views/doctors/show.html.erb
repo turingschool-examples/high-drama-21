@@ -1,7 +1,20 @@
 <h1><%= @doctor.name %></h1>
+
+<div class="specialty">
 <h3>Specialty: <%= @doctor.specialty %></h3>
+</div>
+
+<div class="university">
 <h3>Medical School: <%= @doctor.university %></h3>
+</div>
+
+<div class="hospital">
+<h3>Hospital: <%= @doctor.hospital_name %></h3>
+</div>
+
+<div class="patients">
 <h3>Patients: <% @doctor.patients.each do |patient| %></h3>
   <h3>Hospital: <%= @doctor.hospital_name %></h3>
-  <p><%= patient.name %><%= button_to "Remove #{patient.name}", "/doctors/#{@doctor.id}/patients/#{patient.id}", method: :delete %></p>
+  <p><%= patient.name %> <%= button_to "Remove #{patient.name}", "/doctors/#{@doctor.id}/patients/#{patient.id}", method: :delete %></p>
 <% end %>
+</div>

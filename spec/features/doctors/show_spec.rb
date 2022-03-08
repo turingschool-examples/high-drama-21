@@ -28,22 +28,28 @@ RSpec.describe 'Doctors SHOW page' do
     it "Shows the doctor's specialty" do
       visit "/doctors/#{doctor_1.id}"
 
-      expect(page).to have_content("Specialty: #{doctor_1.specialty}")
-      expect(page).to_not have_content("Specialty: #{doctor_2.specialty}")
+      within("div.specialty") do
+        expect(page).to have_content("Specialty: #{doctor_1.specialty}")
+        expect(page).to_not have_content("Specialty: #{doctor_2.specialty}")
+      end
     end
 
     it "Shows the doctor's university" do
       visit "/doctors/#{doctor_1.id}"
 
-      expect(page).to have_content("Medical School: #{doctor_1.university}")
-      expect(page).to_not have_content("Medical School: #{doctor_2.university}")
+      within("div.university") do
+        expect(page).to have_content("Medical School: #{doctor_1.university}")
+        expect(page).to_not have_content("Medical School: #{doctor_2.university}")
+      end
     end
 
     it "Shows name of hospital where doctor works" do
       visit "/doctors/#{doctor_1.id}"
 
-      expect(page).to have_content(hospital_1.name)
-      expect(page).to_not have_content(hospital_2.name)
+      within("div.hospital") do
+        expect(page).to have_content(hospital_1.name)
+        expect(page).to_not have_content(hospital_2.name)
+      end
     end
 
     it "Shows all of the patients associated with a specific doctor" do
@@ -58,16 +64,15 @@ RSpec.describe 'Doctors SHOW page' do
   end
 
   describe 'User Story #3' do
-    it "Removes a patient from a doctor's Show page" do
+    it "can remove a patient from a doctors caseload" do
       visit "/doctors/#{doctor_1.id}"
 
-      expect(page).to have_content(patient_1.name)
-
-      click_on "Remove #{patient_1.name}"
-
-      expect(current_path).to eq("/doctors/#{doctor_1.id}")
-
-      expect(page).to_not have_content(patient_1.name)
+      within("div.patients") do
+        expect(page).to have_content(patient_1.name)
+        click_on "Remove #{patient_1.name}"
+        expect(current_path).to eq("/doctors/#{doctor_1.id}")
+        expect(page).to_not have_content(patient_1.name)
+      end
     end
   end
 
