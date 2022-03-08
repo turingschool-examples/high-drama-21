@@ -10,4 +10,3 @@ class Hospital < ApplicationRecord
     self.doctors.select('university').distinct
   end
 end
-# passengers.select('passengers.*').where('passengers.age >= 18').distinct

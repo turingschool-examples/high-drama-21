@@ -47,7 +47,7 @@ RSpec.describe 'Doctor Show page', type: :feature do
       DoctorPatient.create!(doctor_id: doctor1.id, patient_id: patient2.id)
 
       visit doctor_path(doctor1)
-save_and_open_page
+
       expect(page).to have_content(doctor1.name)
 
       expect(page).to have_content(patient1.name)
