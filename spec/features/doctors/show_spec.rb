@@ -24,4 +24,13 @@ RSpec.describe 'Doctors SHOW page' do
     expect(page).to_not have_content(doctor_2.name)
   end
 
+  it "shows doctors specialty" do
+    visit "/doctors/#{doctor_1.id}"
+
+    expect(page).to have_content("Specialty: #{doctor_1.specialty}")
+    expect(page).to_not have_content("Specialty: #{doctor_2.specialty}")
+  end
+
+
+
 end
