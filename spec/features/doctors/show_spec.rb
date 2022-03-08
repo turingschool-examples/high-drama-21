@@ -14,18 +14,31 @@ RSpec.describe 'doctors show page' do
 
     visit hospital_doctor_path(@hospital1, @doctor1)
   end
-  it 'shows all attributes' do
-    expect(page).to have_content(@doctor1.name)
-    expect(page).to have_content(@doctor1.specialty)
-    expect(page).to have_content(@doctor1.university)
+
+  describe 'shows' do
+    it 'all attributes' do
+      expect(page).to have_content(@doctor1.name)
+      expect(page).to have_content(@doctor1.specialty)
+      expect(page).to have_content(@doctor1.university)
+    end
+    it 'hospital belonging to doctor' do
+      expect(page).to have_content(@hospital1.name)
+      expect(page).to have_no_content(@hospital2.name)
+    end
+    it 'all patients' do
+      expect(page).to have_content(@patient1.name)
+      expect(page).to have_content(@patient2.name)
+      expect(page).to have_no_content(@patient3.name)
+    end
   end
-  it 'shows hospital belonging to doctor' do
-    expect(page).to have_content(@hospital1.name)
-    expect(page).to have_no_content(@hospital2.name)
-  end
-  it 'shows all patients' do
-    expect(page).to have_content(@patient1.name)
-    expect(page).to have_content(@patient2.name)
-    expect(page).to have_no_content(@patient3.name)
+
+  describe 'deletes' do
+    it 'has a link to remove patient' do
+      click_link("#{@patient1.name}")
+      expect(page_path).to eq(hospital_doctor_path(@hospital1, @doctor1))
+    end
+    it 'deletes patient'do
+      expect(page).to have_no_content(@patient1.name)
+    end
   end
 end
