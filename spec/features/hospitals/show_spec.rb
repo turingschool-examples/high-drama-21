@@ -9,7 +9,7 @@ RSpec.describe 'Hospital Show page', type: :feature do
       @hospital2 = Hospital.create!(name: "Mike Dani Memorial Hospital")
       @doctor1 = @hospital1.doctors.create!(name: "Miranda Bailey", specialty: "General Surgery", university: "Stanford University")
       @doctor2 = @hospital1.doctors.create!(name: "Bob Lemon", specialty: "Heart", university: "NYU")
-      @doctor3 = @hospital2.doctors.create!(name: "Sarah Lime", specialty: "Lung", university: "Ga Tech")
+      @doctor3 = @hospital1.doctors.create!(name: "Sarah Lime", specialty: "Lung", university: "NYU")
       @doctor4 = @hospital2.doctors.create!(name: "Tenzin Davidy", specialty: "Foot", university: "CDMX Univ")
       @doctor5 = @hospital2.doctors.create!(name: "Cathy Marie", specialty: "Brain", university: "Cali University")
       @patient1 = Patient.create!(name: 'Red', age: 32)
@@ -36,7 +36,8 @@ RSpec.describe 'Hospital Show page', type: :feature do
 
     expect(page).to have_content(@hospital1.name)
     expect(page).to have_content(@hospital1.number_of_doctors)
-    expect(page).to have_content(@hospital1.unique_unis)
+    expect(page).to have_content(@doctor1.university)
+    expect(page).to have_content(@doctor2.university)
 
    end
   end
