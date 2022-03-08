@@ -17,29 +17,26 @@ RSpec.describe 'Doctors SHOW page' do
   let!(:doctor_patient_2) {DoctorPatient.create!(patient_id: patient_2.id, doctor_id: doctor_1.id)}
   let!(:doctor_patient_3) {DoctorPatient.create!(patient_id: patient_3.id, doctor_id: doctor_2.id)}
   let!(:doctor_patient_4) {DoctorPatient.create!(patient_id: patient_4.id, doctor_id: doctor_2.id)}
+  describe 'User Story 2' do
+    it "Shows hospital's name" do
+      visit "/hospitals/#{hospital_1.id}"
 
-  it "Shows hospital's name" do
-    visit "/hospitals/#{hospital_1.id}"
+      expect(page).to have_content(hospital_1.name)
+      expect(page).to_not have_content(hospital_2.name)
+    end
 
-    expect(page).to have_content(hospital_1.name)
-    expect(page).to_not have_content(hospital_2.name)
+    it "Shows the total count of doctors working at a specific hospital" do
+      visit "/hospitals/#{hospital_1.id}"
+
+      expect(page).to have_content("Number of Doctors: 3")
+    end
+
+    it "shows a unique list of universities that this hospital's doctors attended" do
+      visit "/hospitals/#{hospital_1.id}"
+
+      expect(page).to have_content(doctor_1.university)
+      expect(page).to have_content(doctor_2.university)
+    end
   end
-
-  it "Shows the total count of doctors working at a specific hospital" do
-    visit "/hospitals/#{hospital_1.id}"
-
-    expect(page).to have_content("Number of Doctors: 3")
-  end
-
-  it "shows a unique list of universities that this hospital's doctors attended" do
-    visit "/hospitals/#{hospital_1.id}"
-
-    expect(page).to have_content(doctor_1.university)
-    expect(page).to have_content(doctor_2.university)
-  end
-
-
-
-
 
 end
