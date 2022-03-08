@@ -1,0 +1,12 @@
+Doctor Name: <%= @doctor.name %><br>
+Speciality: <%= @doctor.specialty%><br>
+University: <%= @doctor.university %><br>
+Hospital: <%= @doctor.hospital_name %><br>
+  <% @doctor.doctor_patients. each do | dr_pt | %>
+    <%= dr_pt.find_name %><br>
+    <%= form_with url: "/doctors/#{dr_pt.doctor_id}", method: :delete, local: true do |f| %>
+    <%= f.text_field :dr_pt_id, value: dr_pt.id, hidden: true %>
+    <%= f.text_field :doctor_id, value: dr_pt.doctor_id, hidden: true %>
+    <%= f.submit "Remove #{dr_pt.find_name} from this doctor's caseload" %>
+    <% end %>
+  <% end %>
