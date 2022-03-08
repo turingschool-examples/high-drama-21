@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :hospital do
+    resources :doctor, only: [:show, :destroy]
+  end
 end
