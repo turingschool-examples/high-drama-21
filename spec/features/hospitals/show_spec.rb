@@ -18,8 +18,8 @@ RSpec.describe 'hospital show page' do
   it 'shows number of doctors in hospital' do
     expect(page).to have_content('3')
   end
-  it 'shows universities of doctors once' do
-    expect(page).to have_content('Standford University')
-    expect(page).to have_content('Colorado Boulder University')
+  it 'shows universities of doctors' do
+    expect(page).to have_content(@doctor1.university)
+    expect(page).to have_content(@doctor3.university)
   end
 end
