@@ -25,6 +25,20 @@ RSpec.describe 'Doctors SHOW page' do
     expect(page).to_not have_content(hospital_2.name)
   end
 
+  it "Shows the total count of doctors working at a specific hospital" do
+    visit "/hospitals/#{hospital_1.id}"
+
+    expect(page).to have_content("Number of Doctors: 3")
+  end
+
+  it "shows a unique list of universities that this hospital's doctors attended" do
+    visit "/hospitals/#{hospital_1.id}"
+
+    expect(page).to have_content(doctor_1.university)
+    expect(page).to have_content(doctor_2.university)
+  end
+
+
 
 
 
