@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Hospital do
+
   describe 'relationships' do
     it { should have_many(:doctors) }
     it { should have_many(:patients).through(:doctors)}
   end
+
   before :each do
     @hospital1 = Hospital.create!(name: "Grey Sloan Memorial Hospital")
     @hospital2 = Hospital.create!(name: "Mike Dani Memorial Hospital")
@@ -14,6 +16,7 @@ RSpec.describe Hospital do
     @doctor4 = @hospital2.doctors.create!(name: "Tenzin Davidy", specialty: "Foot", university: "CDMX Univ")
     @doctor5 = @hospital2.doctors.create!(name: "Cathy Marie", specialty: "Brain", university: "CDMX Univ")
   end
+  
   describe 'class methods' do
     it '.number_of_doctors' do
 

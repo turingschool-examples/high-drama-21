@@ -55,7 +55,7 @@ RSpec.describe 'Doctor Show page', type: :feature do
 
       click_button "Remove #{patient1.name} from this doctor's caseload"
       expect(current_path).to eq(doctor_path(doctor1))
-save_and_open_page
+
       expect(page).to_not have_content(patient1.name)
       expect(page).to have_content(patient2.name)
     end

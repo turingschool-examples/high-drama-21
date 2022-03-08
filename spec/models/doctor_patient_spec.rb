@@ -22,9 +22,9 @@ RSpec.describe DoctorPatient do
 
     it '.find_name' do
 
-     expect(dp1.find_name).to eq(patient1.name)
-     expect(dp2.find_name).to eq(patient2.name)
-     expect(dp3.find_name).to eq(patient3.name)
+      expect(dp1.find_name).to eq(patient1.name)
+      expect(dp2.find_name).to eq(patient2.name)
+      expect(dp3.find_name).to eq(patient3.name)
     end
   end
 end
